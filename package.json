@@ -2,15 +2,26 @@
     "name": "wetube",
     "version": "1.0.0",
     "description": "Wetube Clone built using NodeJS, Express, Mongo and ES6",
-    "main": "index.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Bona023/wetube-clone.git"
+    },
+    "scripts": {
+        "dev": "nodemon --exec babel-node src/index.js"
     },
     "author": "Bona023",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/Bona023/wetube-clone/issues"
     },
-    "homepage": "https://github.com/Bona023/wetube-clone#readme"
+    "homepage": "https://github.com/Bona023/wetube-clone#readme",
+    "dependencies": {
+        "express": "^4.17.3"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.17.9",
+        "@babel/node": "^7.16.8",
+        "@babel/preset-env": "^7.16.11",
+        "nodemon": "^2.0.15"
+    }
 }
