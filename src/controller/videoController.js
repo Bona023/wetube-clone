@@ -5,10 +5,10 @@ export const home = async (req, res) => {
     return res.render("home", { pageTitle: "Home", videos });
 };
 export const watch = async (req, res) => {
-    const { id } = req.params; //! (같은 코드) const id = req.params.id
+    const { id } = req.params;
     const video = await Video.findById(id);
     if (!video) {
-        return res.render("404", { pageTitle: "Video not Found" });
+        return res.status(404).render("404", { pageTitle: "Video not Found" });
     }
     return res.render("watch", { pageTitle: video.title, video });
 };
@@ -16,7 +16,7 @@ export const getEdit = async (req, res) => {
     const { id } = req.params;
     const video = await Video.findById(id);
     if (!video) {
-        return res.render("404", { pageTitle: "Video not Found" });
+        return res.status(404).render("404", { pageTitle: "Video not Found" });
     }
     res.render("Edit", { pageTitle: `Editing: ${video.title}`, video });
 };
@@ -25,7 +25,7 @@ export const postEdit = async (req, res) => {
     const { title, description, hashtags } = req.body;
     const video = await Video.exists({ _id: id });
     if (!video) {
-        return res.render("404", { pageTitle: "Video not Found" });
+        return res.status(404).render("404", { pageTitle: "Video not Found" });
     }
     await Video.findByIdAndUpdate(id, {
         title,
@@ -50,7 +50,7 @@ export const postUpload = async (req, res) => {
         });
         return res.redirect("/");
     } catch (error) {
-        return res.redirect("upload", {
+        return res.status(400).redirect("upload", {
             pageTitle: "Upload Video",
             errorMessage: error._message,
         });
