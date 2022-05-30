@@ -4,22 +4,25 @@ export const home = async (req, res) => {
     const videos = await Video.find({}).sort({ createdAt: "desc" });
     return res.render("home", { pageTitle: "Home", videos });
 };
+
 export const watch = async (req, res) => {
     const { id } = req.params;
     const video = await Video.findById(id);
     if (!video) {
         return res.status(404).render("404", { pageTitle: "Video not Found" });
     }
-    return res.render("watch", { pageTitle: video.title, video });
+    return res.render("videos/watch", { pageTitle: video.title, video });
 };
+
 export const getEdit = async (req, res) => {
     const { id } = req.params;
     const video = await Video.findById(id);
     if (!video) {
         return res.status(404).render("404", { pageTitle: "Video not Found" });
     }
-    res.render("Edit", { pageTitle: `Editing: ${video.title}`, video });
+    res.render("users/Edit", { pageTitle: `Editing: ${video.title}`, video });
 };
+
 export const postEdit = async (req, res) => {
     const { id } = req.params;
     const { title, description, hashtags } = req.body;
@@ -36,10 +39,11 @@ export const postEdit = async (req, res) => {
 };
 
 export const getUpload = (req, res) => {
-    return res.render("upload", {
+    return res.render("videos/upload", {
         pageTitle: "Upload Video",
     });
 };
+
 export const postUpload = async (req, res) => {
     const { title, description, hashtags } = req.body;
     try {
@@ -56,11 +60,13 @@ export const postUpload = async (req, res) => {
         });
     }
 };
+
 export const deleteVideo = async (req, res) => {
     const { id } = req.params;
     await Video.findByIdAndDelete(id);
     return res.redirect("/");
 };
+
 export const search = async (req, res) => {
     const { keyword } = req.query;
     let videos = [];
@@ -71,5 +77,5 @@ export const search = async (req, res) => {
             },
         });
     }
-    return res.render("Search", { pageTitle: "Search", videos });
+    return res.render("videos/Search", { pageTitle: "Search", videos });
 };
