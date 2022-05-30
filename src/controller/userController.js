@@ -3,6 +3,7 @@ import fetch from "cross-fetch";
 import bcrypt from "bcrypt";
 
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
+
 export const postJoin = async (req, res) => {
     const { name, email, username, password, password2, location } = req.body;
     const pageTitle = "Join";
@@ -29,7 +30,8 @@ export const postJoin = async (req, res) => {
         });
         return res.redirect("/login");
     } catch (error) {
-        return res.status(400).redirect("join", {
+        console.log(error);
+        return res.status(400).render("join", {
             pageTitle,
             errorMessage: error._message,
         });
@@ -156,6 +158,18 @@ export const postEdit = async (req, res) => {
         },
         body: { name, username, email, location },
     } = req;
+    if (req.session.user.username !== username) {
+        const exists = await User.exists({ username });
+        if (exists) {
+            return res.render("edit-profile", { pageTitle: "Edit Profile", errorMessage: "이미 사용중인 username 입니다." });
+        }
+    }
+    if (req.session.user.email !== email) {
+        const exists = await User.exists({ email });
+        if (exists) {
+            return res.render("edit-profile", { pageTitle: "Edit Profile", errorMessage: "이미 사용중인 email 입니다." });
+        }
+    }
     const updatedUser = await User.findByIdAndUpdate(
         _id,
         {
