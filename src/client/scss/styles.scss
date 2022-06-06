@@ -9,6 +9,7 @@
 @import "./components/shared.scss";
 @import "./components/forms.scss";
 @import "./components/social-login.scss";
+@import "./components/video-player.scss";
 
 //* Screens
 @import "./screens/search.scss";
@@ -17,7 +18,6 @@
 @import "./screens/home.scss";
 
 //* Defaults
-
 a {
     color: inherit;
     text-decoration: none;
@@ -37,9 +37,4 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    video {
-        width: 900px;
-        height: 550px;
-        margin-bottom: 10px;
-    }
 }

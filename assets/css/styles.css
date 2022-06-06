@@ -266,6 +266,107 @@ input[type=submit],
   color: azure;
 }
 
+#videoContainer {
+  width: 100%;
+  position: relative;
+}
+#videoContainer video {
+  width: 100%;
+}
+#videoContainer .videoControls {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  align-items: center;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 10px;
+  width: 95%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template: "timeline timeline timeline timeline" 33% "playControl volumeControl . screenControl" 67%/15% 20% 60% 5%;
+  gap: 5px;
+  background-color: transparent;
+  justify-content: center;
+  padding: 10px;
+  left: 0;
+  box-sizing: border-box;
+}
+#videoContainer .videoControls.showing {
+  opacity: 1;
+}
+#videoContainer .videoControls .videoControls__timeline {
+  grid-area: timeline;
+}
+#videoContainer .videoControls .videoControls__play {
+  grid-area: playControl;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 5px;
+}
+#videoContainer .videoControls .videoControls__play .videoControls__playBtn {
+  margin: 0px 15px;
+}
+#videoContainer .videoControls .videoControls__play .videoControls__playBtn:hover {
+  cursor: pointer;
+}
+#videoContainer .videoControls .videoControls__play .videoControls__time {
+  margin-left: 10px;
+  font-size: 14px;
+}
+#videoContainer .videoControls .videoControls__volume {
+  grid-area: volumeControl;
+  display: flex;
+  align-items: center;
+}
+#videoContainer .videoControls .videoControls__volume span {
+  margin-left: 10px;
+}
+#videoContainer .videoControls .videoControls__volume span i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+#videoContainer .videoControls .videoControls__volume span i:hover {
+  cursor: pointer;
+}
+#videoContainer .videoControls .videoControls__fullScreen {
+  grid-area: screenControl;
+}
+#videoContainer .videoControls .videoControls__fullScreen i:hover {
+  cursor: pointer;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  background: transparent;
+  overflow: hidden;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 7px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  border: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 7px;
+  width: 7px;
+  border-radius: 2px;
+  border: 1px solid rgb(58, 184, 251);
+  background: teal;
+  box-shadow: -100vw 0 0 100vw rgba(0, 128, 128, 0.8);
+  cursor: pointer;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+}
+
 .profile__data {
   max-width: 420px;
   margin: 0 auto;
@@ -314,9 +415,4 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-main video {
-  width: 900px;
-  height: 550px;
-  margin-bottom: 10px;
 }
