@@ -1,7 +1,7 @@
 # Wetube Reloaded
 
 -   global router  
-    / -> Home
+    / -> Home  
     /join -> Join  
     /login -> Login  
     /search -> Search
